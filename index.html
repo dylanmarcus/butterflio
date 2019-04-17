@@ -30,7 +30,7 @@
                         <a href="#" class="btn btn--white btn-summarize">summarize</a>
                     </div>
                     <div class="col-1-of-4">
-                        <a href="#speed-read" class="btn btn--white">speed read</a>
+                        <a href="#speed-read" class="btn btn--white btn-speed-read">speed read</a>
                     </div>
                     <div class="col-1-of-4">
                         &ensp;
@@ -56,10 +56,25 @@
             </ul>
         </section><!--END SECTION-SUMMARIZED-TEXT-->
 
-        <div class="popup" id="speed-read">
-            <div class="popup__content">
-                <h1>speed reading</h1>
-                <a href="#" class="popup__close">&times;</a>
+        <div class="speed-read-popup" id="speed-read">
+            <div class="speed-read-popup__content">
+                <div class="speed-read-popup__container">
+                    <div class="speed-read-popup__word speed-read-popup__row word">
+                        word
+                    </div>
+                    <div class="speed-read-popup__options speed-read-popup__row">
+                        <div class="speed-read-popup__option-item">
+                                <a href="#speed-read" class="btn btn--white prev">prev</a>
+                        </div>
+                        <div class="speed-read-popup__option-item">
+                            <a href="#speed-read" class="btn btn--white play">play</a>
+                        </div>
+                        <div class="speed-read-popup__option-item">
+                                <a href="#speed-read" class="btn btn--white next">next</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="speed-read-popup__close">&times;</a>
             </div>
         </div>
 
