@@ -78,7 +78,7 @@
     }
 
     &__row {
-        max-width: 50%;
+        max-width: 80%;
     }
     
     &__word {
@@ -88,14 +88,20 @@
 
     &__options {
         display: flex;
+        align-items: center;
         margin-top: auto;
         width: 100%;
     }
 
     &__option-item {
-        flex-grow: 1;
-        text-align: center;
-    }
 
-    // button styles are in btn.scss
+        &--speed {
+            text-align: left;
+        }
+
+        &--play {
+            margin-left: 22%;
+            text-align: center;
+        }
+    }
 }

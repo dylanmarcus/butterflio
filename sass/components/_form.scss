@@ -1,0 +1,34 @@
+.form {
+
+    &__input {
+        font-size: 2rem;
+        font-family: inherit;
+        color: inherit;
+        // padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($color-white, .5);
+        border: none;
+        border-bottom: 3px solid $color-green;
+        width: 6rem;
+        transition: all .3s;
+
+        &:focus {
+            outline: none;
+            // box-shadow: 0 1rem 2rem rgba($color-black, .1);
+            border-bottom: 3px solid $color-green;
+        }
+    }
+
+    &__label {
+        font-size: 2rem;
+        font-weight: 700;
+
+        &--speed {
+            justify-self: start;
+        }
+
+        &--play {
+            justify-self: center;
+        }
+    }
+}

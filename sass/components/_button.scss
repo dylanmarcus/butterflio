@@ -17,6 +17,11 @@
     &:focus {
         outline: none;
     }
+
+    &--small {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
     
     &--white {
         background-color: $color-white;
