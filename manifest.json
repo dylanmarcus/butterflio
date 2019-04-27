@@ -1,28 +1,29 @@
 {
-    "name": "Butterflio",
+    "name": "Butterfl.io",
     "version": "1.0",
     "description": "Improve your research!",
 	"permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
 	"options_page": "index.html",
-    "chrome_url_overrides" : {
-      "newtab": "index.html"
-    },
 	"background": {
-      "scripts": ["js/popup.js"],
+      "scripts": ["js/content.js"],
       "persistent": false
     },
 
     "content_security_policy": "default-src 'self'; style-src 'self' https://fonts.googleapis.com; script-src 'self' 'unsafe-eval'",
 
-
-
 	"content_scripts": [{
-		"matches": ["http://*/*"],
-		"matches": ["https://*/*"],
-		"css": ["css/style.css"]
+		"matches": ["<all_urls>"],
+		"css": ["css/style.css"],
+        "js": ["js/getPagesSource.js"]
 	}],
     "browser_action": {
-      "default_icon": "images/16.png"
+      "default_title": "Butterfl.io",
+      "default_icon": {
+        "16": "images/16.png",
+        "32": "images/32.png",
+        "48": "images/48.png",
+        "128": "images/128.png"
+      }
     },
 	"icons": {
       "16": "images/16.png",
