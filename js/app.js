@@ -6,9 +6,12 @@ $(document).ready(function() {
     var summarizedTextSection = $('.section-summarized-text');
     var textState = 'full';
 
+    var shortText;
     function setText(domContent) {
         localStorage.setItem("longText", domContent);
         document.getElementById("fullText").innerHTML = domContent;
+        shortText = sum({ 'corpus' : domContent});
+        document.getElementById("shortText").innerHTML = shortText.summary;
     }
 
     chrome.runtime.sendMessage({from: 'app'}, setText);

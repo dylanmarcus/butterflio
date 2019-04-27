@@ -48,13 +48,14 @@
         </section><!--END SECTION-FULL-TEXT-->
         
         <section class="section-summarized-text">
-            <ul>
+            <p id="shortText"></p>
+            <!--<ul>
                 <li>IN THE year 1878 Dr. Watson got Doctorate in Medicine of the University of London.</li>
                 <li>Dr. Watson was wounded in the battle of Maiwand.</li>
                 <li>Sherlock Holmes is a jerk, but he is the world's greatest detective.</li>
                 <li>Professor Moriarty is Sherlock Holmes' arch nemesis and is a baaaaaad man.</li>
                 <li>Sherlock Holmes' genius is rivaled by that of Professor Moriarty.</li>
-            </ul>
+            </ul>-->
         </section><!--END SECTION-SUMMARIZED-TEXT-->
 
         <div class="speed-read-popup" id="speed-read">
@@ -83,7 +84,10 @@
 
         <script src="js/external.js"></script>
         <script src="js/app.js"></script>
-<!--        <script src="js/content.js"></script>-->
         <script src="js/getPagesSource.js"></script>
+        <script src="/summary/lib/underscore-1.2.3.js"></script>
+        <script src="/summary/lib/underscore.string-2.0.0.js"></script>
+        <script src="/summary/lib/porter-stemmer.js"></script>
+        <script src="/summary/sum.js"></script>
     </body>
 </html>

@@ -10,5 +10,9 @@
   "license": "ISC",
   "devDependencies": {
     "node-sass": "node-sass --output-style compressed -o dist/css src/scss"
+  },
+  "dependencies": {
+    "@babel/core": "^7.4.4",
+    "node-summary": "^1.2.0"
   }
 }
