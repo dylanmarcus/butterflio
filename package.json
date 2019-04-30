@@ -13,6 +13,9 @@
   },
   "dependencies": {
     "@babel/core": "^7.4.4",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "flatted": "^2.0.0",
+    "kleur": "^3.0.3",
     "node-readability": "^3.0.0",
     "node-summary": "^1.2.0",
     "rmwc": "^5.4.2"

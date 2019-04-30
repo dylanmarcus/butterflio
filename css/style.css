@@ -16,7 +16,7 @@ body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
   line-height: 1.7;
-  color: #777; }
+  background-color: #e9e9e9; }
 
 *,
 *::after,
@@ -28,13 +28,53 @@ body {
 html {
   font-size: 62.5%; }
 
+header {
+  display: none;
+  content: '';
+}
+
+footer {
+  display: none;
+  content: '';
+}
+
+li {
+  display: none;
+}
+
+ul {
+  display: none;
+}
+
+button {
+  display: none;
+}
+
+iframe {
+  display: none;
+}
+
 body {
   box-sizing: border-box;
   padding: 3rem; }
 
 .section-full-text {
-  padding-top: 10rem;
-  font-size: 1.5rem; }
+  padding: 5rem;
+  font-size: 1.5rem;
+  margin-top: 5rem;
+  float: left;
+  left: 15%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  border: solid 1px !important;
+  border-color: #dcdcdc !important;
+  align-content: center;
+  width: 70%;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+  max-width: 900px;
+}
 
 .section-summarized-text {
   display: none;

@@ -2,8 +2,6 @@
 
 function doStuffWithDom(domContent) {
 
-    localStorage.setItem("longText", domContent);
-
     chrome.runtime.onMessage.addListener(function (obj, sender, sendResponse) {
         if ( obj && obj.from === 'app' ) {
             sendResponse(domContent);
