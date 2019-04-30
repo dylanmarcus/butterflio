@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@babel/core": "^7.4.4",
-    "node-summary": "^1.2.0"
+    "node-readability": "^3.0.0",
+    "node-summary": "^1.2.0",
+    "rmwc": "^5.4.2"
   }
 }
