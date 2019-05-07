@@ -142,7 +142,7 @@
 
             // Clean corpus.
             var s = opts.corpus.split(sentenceDelimiter);
-            var sentences = _(s).map( function (s) {
+            var sentences = (s).map( function (s) {
                 return new Sentence(s);
             });
 

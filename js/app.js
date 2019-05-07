@@ -8,14 +8,16 @@ $(document).ready(function() {
 
     var shortText;
     function setText(domContent) {
-        document.getElementById("fullText").innerHTML = domContent;
 
-        shortText = sum({ 'corpus' : domContent});
+        Mercury.parse(domContent, { contentType: 'markdown' }).then(result => localStorage.setItem("content", result));
+
+        document.getElementById("fullText").innerHTML = localStorage.getItem("content").content;
+
+        shortText = sum({ 'corpus' : localStorage.getItem("content").content});
         document.getElementById("shortText").innerHTML = shortText.summary;
     }
 
     chrome.runtime.sendMessage({from: 'app'}, setText);
-
 
     function doStuffWithDom(domContent) {
 
@@ -30,6 +32,8 @@ $(document).ready(function() {
     chrome.browserAction.onClicked.addListener(function (tab) {
         chrome.tabs.sendMessage(tab.id, {text: 'report_back'}, doStuffWithDom);
     });
+
+    summarizedTextSection.hide();
 
     summarizeButton.click(function() {
         console.log(textState);
@@ -108,10 +112,9 @@ $(document).ready(function() {
     var speed = speedInput[0].value;
     var waitTime = 60 / speed * 1000;
 
-    var speedReadText = localStorage.getItem("longText").toString();
+    var speedReadText = localStorage.getItem("content").innerText;
 
     //var speedReadText = "IN THE year 1878 I took my degree of Doctor of Medicine of the University of London, and proceeded to Netley to go through the course prescribed for surgeons in the Army. Having completed my studies there, I was duly attached to the Fifth Northumberland Fusiliers as assistant surgeon. The regiment was stationed in India at the time, and before I could join it, the second Afghan war had broken out. On landing at Bombay, I learned that my corps had advanced through the passes, and was already deep in the enemy's country. I followed, however, with many other officers who were in the same situation as myself, and succeeded in reaching Candahar in safety, where I found my regiment, and at once entered upon my new duties.";
-    localStorage.setItem("longText", document.body.innerText);
     var speedReadWords = speedReadText.split(' ');
 
     var currentWord = 0;
