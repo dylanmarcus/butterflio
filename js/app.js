@@ -9,11 +9,18 @@ $(document).ready(function() {
     var shortText;
     function setText(domContent) {
 
-        Mercury.parse(domContent, { contentType: 'markdown' }).then(result => localStorage.setItem("content", result));
+        Mercury.parse(domContent).then(result => localStorage.setItem("content", result.content));
 
-        document.getElementById("fullText").innerHTML = localStorage.getItem("content").content;
+        // This sets the page's content with the full text.
+        document.getElementById("fullText").innerHTML = localStorage.getItem("content");
 
-        shortText = sum({ 'corpus' : localStorage.getItem("content").content});
+        // This is the data for the SpeedReader
+        localStorage.setItem('localText', document.getElementById('fullText').innerText);
+
+        var divHeight = document.getElementById('fullText').offsetHeight;
+        var lines = Math.floor(divHeight / 200);
+
+        shortText = sum({ 'corpus' : localStorage.getItem("content"), 'nSentences' : lines});
         document.getElementById("shortText").innerHTML = shortText.summary;
     }
 
@@ -37,14 +44,14 @@ $(document).ready(function() {
 
     summarizeButton.click(function() {
         console.log(textState);
-        if (textState == 'full') {
+        if (textState === 'full') {
             textState = 'summarized';
             summarizeButton.removeClass('btn--white').addClass('btn--green');
             fullTextSection.hide();
             summarizedTextSection.show();
         }
 
-        else if (textState == 'summarized') {
+        else if (textState === 'summarized') {
             console.log('ass');
             textState = 'full';
             summarizeButton.removeClass('btn--green').addClass('btn--white');
@@ -57,31 +64,34 @@ $(document).ready(function() {
     var speedReadContent = $('.speed-read-popup__content');
     var speedReadButton = $('.btn-speed-read');
     var speedReadClose = $('.speed-read-popup__close');
+    var speedReadCloseOuter = $('.stop-scrolling');
 
     speedReadButton.click(function() {
-        speedReadContent.addClass('open');        
+        speedReadContent.addClass('open');
+        $('body').addClass('stop-scrolling')
     });
 
     speedReadClose.click(function() {
-        speedReadContent.removeClass('open');        
+        speedReadContent.removeClass('open');
+        $('body').removeClass('stop-scrolling')
+    });
+
+    $(speedReadCloseOuter).on('focusout', function () {
+        alert("FUck you");
+        speedReadContent.removeClass('open');
+        $('body').removeClass('stop-scrolling')
     });
 
     function closeSpeedReadPopup() {
         if (speedReadContent.hasClass('open')) {
-            var url = window.location.href.split("/");
-                if (url[url.length - 1].length < 1) {
-                    url = url.splice(url.length - 1, 1);
-                }
-                url[url.length - 1] = '#';
-                url = url.join("/");
-                window.location.replace(url);
-                speedReadContent.removeClass('open');
+            speedReadContent.removeClass('open');
+            $('body').removeClass('stop-scrolling');
         }
     }
 
     // close speed read popup on 'Escape' press or outside click
     $(document).on('keyup',function(evt) {
-        if (evt.keyCode == 27) {
+        if (evt.keyCode === 27) {
             closeSpeedReadPopup();
         }
     });
@@ -94,13 +104,22 @@ $(document).ready(function() {
 
     // prevent spacebar scrolling when popup is open
     window.addEventListener('keydown', function(e) {
-        if(e.keyCode == 32 && e.target == document.body) {
+        if(e.keyCode === 32 && e.target === document.body) {
             if (speedReadContent.hasClass('open')) {
                 e.preventDefault();
             }
         }
     });
 
+
+    // Hide Images
+    var images = document.getElementsByTagName('img');
+    for (i = 0; i < images.length;i++ ) {
+        images[i].style.display = "none";
+        images[i].style.maxWidth = "70%";
+    }
+    var butt = document.getElementById('butt');
+    butt.style.display = "block";
 
     // SPEED READ FUNCTIONALITY
 
@@ -112,16 +131,15 @@ $(document).ready(function() {
     var speed = speedInput[0].value;
     var waitTime = 60 / speed * 1000;
 
-    var speedReadText = localStorage.getItem("content").innerText;
 
-    //var speedReadText = "IN THE year 1878 I took my degree of Doctor of Medicine of the University of London, and proceeded to Netley to go through the course prescribed for surgeons in the Army. Having completed my studies there, I was duly attached to the Fifth Northumberland Fusiliers as assistant surgeon. The regiment was stationed in India at the time, and before I could join it, the second Afghan war had broken out. On landing at Bombay, I learned that my corps had advanced through the passes, and was already deep in the enemy's country. I followed, however, with many other officers who were in the same situation as myself, and succeeded in reaching Candahar in safety, where I found my regiment, and at once entered upon my new duties.";
+    var speedReadText = localStorage.getItem('localText');
     var speedReadWords = speedReadText.split(' ');
 
     var currentWord = 0;
     wordDisplayText.text(speedReadWords[currentWord]);
     function speedRead() {
         if (playing) {
-            if (currentWord == speedReadWords.length) {
+            if (currentWord === speedReadWords.length) {
                 speedReadPause();
                 currentWord = 0;
             }
@@ -129,10 +147,10 @@ $(document).ready(function() {
                 waitTime = 60 / speed * 1000;
                 if (currentWord > 0) {
                     var nextWordText = speedReadWords[currentWord - 1];
-                    if (nextWordText[nextWordText.length - 1] == '.') {
+                    if (nextWordText[nextWordText.length - 1] === '.') {
                         waitTime *= 2;
                     }
-                    if (nextWordText[nextWordText.length - 1] == ',') {
+                    if (nextWordText[nextWordText.length - 1] === ',') {
                         waitTime *= 1.5;
                     }
                 }
@@ -147,6 +165,10 @@ $(document).ready(function() {
         }
     }
 
+    function setSpeed() {
+        
+    }
+    
     function speedReadPlay() {
         playButton.text('pause');
         playing = true;
@@ -169,7 +191,7 @@ $(document).ready(function() {
 
     // play or pause with spacebar
     $(document).on('keyup',function(evt) {
-        if (evt.keyCode == 32) {
+        if (evt.keyCode === 32) {
             if (speedReadContent.hasClass('open')) {
                 if (playing) {
                     speedReadPause();
@@ -179,6 +201,10 @@ $(document).ready(function() {
                 }
             }
         }
+    });
+
+    setSpeedButton.click(function() {
+        speed = speedInput[0].value;
     });
 
 });

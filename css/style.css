@@ -74,6 +74,12 @@ body {
   box-sizing: border-box;
   background-color: #f8f8f8;
   max-width: 900px;
+  z-index: -1;
+}
+
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
 }
 
 .section-summarized-text {
@@ -311,7 +317,8 @@ body {
   .toolbar__checkbox:checked ~ .toolbar__background {
     top: 0;
     opacity: 1;
-    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.15); }
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.15);
+    z-index: 50; !important; }
   .toolbar__checkbox:checked ~ .toolbar__nav {
     top: 1.2rem;
     opacity: 1; }

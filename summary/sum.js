@@ -150,7 +150,7 @@
             if (opts.nWords) {
 
                 // `opts.nSentences` is ignored, output size is determined by lexem size.
-                opts.nSentences = 1;
+                opts.nSentences = 30;
 
                 var nGrams = _(sentences).reduce( function (collect, s) {
                     var orig = s.orig;
