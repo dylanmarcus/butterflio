@@ -5,10 +5,10 @@ $(document).ready(function() {
     var fullTextSection = $('.section-full-text');
     var summarizedTextSection = $('.section-summarized-text');
     var textState = 'full';
-
     var shortText;
-    function setText(domContent) {
 
+    function setText(domContent) {
+        alert("URL 2: "+domContent);
         Mercury.parse(domContent).then(result => localStorage.setItem("content", result.content));
 
         // This sets the page's content with the full text.
@@ -24,10 +24,9 @@ $(document).ready(function() {
         document.getElementById("shortText").innerHTML = shortText.summary;
     }
 
-    chrome.runtime.sendMessage({from: 'app'}, setText);
+    chrome.extension.sendMessage({from: 'app'}, setText);
 
     function doStuffWithDom(domContent) {
-
         chrome.runtime.onMessage.addListener(function (obj, sender, sendResponse) {
             if ( obj && obj.from === 'app' ) {
                 sendResponse(domContent);
@@ -37,7 +36,7 @@ $(document).ready(function() {
     }
 
     chrome.browserAction.onClicked.addListener(function (tab) {
-        chrome.tabs.sendMessage(tab.id, {text: 'report_back'}, doStuffWithDom);
+        chrome.tabs.sendMessage(tab.id, {text: 'app'}, doStuffWithDom);
     });
 
     summarizedTextSection.hide();

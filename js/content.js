@@ -7,7 +7,6 @@ function doStuffWithDom(domContent) {
             sendResponse(domContent);
         }
     });
-
     chrome.tabs.create({'url':"index.html"})
 
 }
