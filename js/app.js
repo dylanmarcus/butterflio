@@ -76,7 +76,8 @@ $(document).ready(function() {
     });
 
     $(speedReadCloseOuter).on('focusout', function () {
-        //alert("FUck you");
+        //alert
+        // ("FUck you");
         speedReadContent.removeClass('open');
         $('body').removeClass('stop-scrolling')
     });

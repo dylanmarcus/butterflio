@@ -290,6 +290,7 @@
         && typeof module !== 'undefined'
         && module.exports
         && typeof require !== 'undefined') {
+        alert("Export to node.js!");
         var stemmer = require( 'porter-stemmer' ).stemmer;
         var _ = require( 'underscore' );
         _.str = require( 'underscore.string' );
@@ -298,6 +299,7 @@
     }
     // exports `sum` to AMD module, defining dependencies
     else if (typeof define === 'function' && define.amd) {
+        alert("Export to AMD!");
         define('sum', [
             'underscore',
             'underscore.string',
@@ -309,6 +311,7 @@
     // export in browser
     else if (typeof this !== 'undefined'
              && this._ && this.stemmer) {
+        alert("Export to browser!");
         this._.mixin( this._.str.exports() );
         this.sum = wrapper(this._, this.stemmer);
     }
