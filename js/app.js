@@ -8,7 +8,7 @@ $(document).ready(function() {
     var shortText;
 
     function setText(domContent) {
-        alert("URL 2: "+domContent);
+        //alert("URL 2: "+domContent);
         Mercury.parse(domContent).then(result => localStorage.setItem("content", result.content));
 
         // This sets the page's content with the full text.
@@ -76,7 +76,7 @@ $(document).ready(function() {
     });
 
     $(speedReadCloseOuter).on('focusout', function () {
-        alert("FUck you");
+        //alert("FUck you");
         speedReadContent.removeClass('open');
         $('body').removeClass('stop-scrolling')
     });
