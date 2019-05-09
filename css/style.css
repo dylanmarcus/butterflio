@@ -97,7 +97,9 @@ body {
   width: 70%;
   box-sizing: border-box;
   background-color: #f8f8f8;
-  max-width: 900px; }
+  max-width: 900px;
+  z-index: -1;
+}
 
 .btn, .btn:link, .btn:visited {
   text-decoration: none;
@@ -114,7 +116,8 @@ body {
   outline: none; }
 
 .btn--small {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  padding: 1rem;
   font-weight: 700; }
 
 .btn--white {
@@ -469,4 +472,16 @@ body {
 .navbar-default .navbar-nav>li>a:hover {
   color: #fff;
   background-color: #0392CC;
+}
+
+.audio-player {
+  display: none;!important;
+}
+
+.image-c {
+  display: none;!important;
+}
+
+.article-single-main-footer {
+  display: none;!important;
 }

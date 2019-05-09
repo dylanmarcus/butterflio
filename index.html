@@ -9,22 +9,22 @@
 
         <link rel="stylesheet" href="css/style.css">
         <!--<link rel="shortcut icon" type="image/png" href="img/favicon.png">-->
-        
+
         <title>Butterflio</title>
     </head>
     <body>
 
         <div class="toolbar">
             <input type="checkbox" class="toolbar__checkbox" id="toolbar-toggle">
-            
+
             <label for="toolbar-toggle" class="toolbar__button">
                 <div class="toolbar__icon-container">
                     <img id="butt" src="img/icon-open.png" alt="butterfly" class="toolbar__icon">
                 </div>
             </label>
-            
+
             <div class="toolbar__background">&nbsp;</div>
-            
+
             <nav class="toolbar__nav">
                 <div class="row">
                     <div class="col-1-of-4">
@@ -48,7 +48,7 @@
         <section class="section-full-text">
             <div id="fullText"></div>
         </section><!--END SECTION-FULL-TEXT-->
-        
+
         <section class="section-summarized-text">
             <div id="shortText"></div>
             <!--<ul>
@@ -69,9 +69,11 @@
                     <div class="speed-read-popup__options speed-read-popup__row">
                         <div class="speed-read-popup__option-item speed-read-popup__option-item--speed">
                             <div class="form">
-                                <label for="speed-input" class="form__label">speed: </label>
-                                <input type="number" value="300" class="form__input" id="speed-input">
-                                <button class="btn btn--green btn--small set-speed">set</button>
+                                <label class="form__label">speed: </label>
+                                <!-- <input type="number" value="300" class="form__input" id="speed-input"> -->
+                                <button class="btn btn--white btn--small set-speed-slow">1</button>
+                                <button class="btn btn--green btn--small set-speed-medium">2</button>
+                                <button class="btn btn--white btn--small set-speed-fast">3</button>
                             </div>
                         </div>
                         <div class="speed-read-popup__option-item speed-read-popup__option-item--play">

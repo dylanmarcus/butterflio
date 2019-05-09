@@ -8,8 +8,10 @@ $(document).ready(function() {
     var shortText;
 
     function setText(domContent) {
-        //alert("URL 2: "+domContent);
-        Mercury.parse(domContent).then(result => localStorage.setItem("content", result.content));
+        //Mercury.parse(domContent).then(result => localStorage.setItem("content", result.content));
+        //Mercury.parse(domContent).then(result => console.log(result));
+        console.log(domContent);
+        localStorage.setItem("content", domContent);
 
         // This sets the page's content with the full text.
         document.getElementById("fullText").innerHTML = localStorage.getItem("content");
@@ -18,26 +20,18 @@ $(document).ready(function() {
         localStorage.setItem('localText', document.getElementById('fullText').innerText);
 
         var divHeight = document.getElementById('fullText').offsetHeight;
-        var lines = Math.floor(divHeight / 200);
+        var lines = Math.floor(divHeight / 300);
 
         shortText = sum({ 'corpus' : localStorage.getItem("content"), 'nSentences' : lines});
-        document.getElementById("shortText").innerHTML = shortText.summary;
+        shortText = shortText.sentences;
+        for (var i = 0; i < shortText.length; i++) {
+            shortText[i] += ".<br><br>";
+        }
+        shortText = shortText.join("");
+        document.getElementById("shortText").innerHTML = shortText;
     }
 
-    chrome.extension.sendMessage({from: 'app'}, setText);
-
-    function doStuffWithDom(domContent) {
-        chrome.runtime.onMessage.addListener(function (obj, sender, sendResponse) {
-            if ( obj && obj.from === 'app' ) {
-                sendResponse(domContent);
-            }
-        });
-
-    }
-
-    chrome.browserAction.onClicked.addListener(function (tab) {
-        chrome.tabs.sendMessage(tab.id, {text: 'app'}, doStuffWithDom);
-    });
+    chrome.runtime.sendMessage({from: 'app'}, setText);
 
     summarizedTextSection.hide();
 
@@ -67,25 +61,26 @@ $(document).ready(function() {
 
     speedReadButton.click(function() {
         speedReadContent.addClass('open');
-        $('body').addClass('stop-scrolling')
+        $('body').addClass('stop-scrolling');
     });
 
     speedReadClose.click(function() {
         speedReadContent.removeClass('open');
-        $('body').removeClass('stop-scrolling')
+        $('body').removeClass('stop-scrolling');
     });
 
     $(speedReadCloseOuter).on('focusout', function () {
-        //alert
-        // ("FUck you");
-        speedReadContent.removeClass('open');
-        $('body').removeClass('stop-scrolling')
+        if (speedReadContent.hasClass('open')) {
+            speedReadContent.removeClass('close');
+            $('body').removeClass('stop-scrolling');
+        }
     });
 
     function closeSpeedReadPopup() {
         if (speedReadContent.hasClass('open')) {
             speedReadContent.removeClass('open');
             $('body').removeClass('stop-scrolling');
+            window.location.replace("index.html");
         }
     }
 
@@ -111,24 +106,15 @@ $(document).ready(function() {
         }
     });
 
-
-    // Hide Images
-    var images = document.getElementsByTagName('img');
-    for (i = 0; i < images.length;i++ ) {
-        images[i].style.display = "none";
-        images[i].style.maxWidth = "70%";
-    }
-    var butt = document.getElementById('butt');
-    butt.style.display = "block";
-
     // SPEED READ FUNCTIONALITY
 
     var wordDisplayText = $('.word');
-    var setSpeedButton = $('.set-speed');
+    var setSpeedSlowButton = $('.set-speed-slow');
+    var setSpeedMediumButton = $('.set-speed-medium');
+    var setSpeedFastButton = $('.set-speed-fast');
     var playButton = $('.play');
-    var speedInput = $('#speed-input');
     var playing = false;
-    var speed = speedInput[0].value;
+    var speed = 300;
     var waitTime = 60 / speed * 1000;
 
 
@@ -163,10 +149,6 @@ $(document).ready(function() {
                 }, waitTime);
             }
         }
-    }
-
-    function setSpeed() {
-        
     }
     
     function speedReadPlay() {
@@ -203,9 +185,30 @@ $(document).ready(function() {
         }
     });
 
-    setSpeedButton.click(function() {
-        speed = speedInput[0].value;
+    setSpeedSlowButton.click(function() {
+        speed = 150;
+        setSpeedSlowButton.removeClass('btn--white').addClass('btn--green');
+        setSpeedMediumButton.removeClass('btn--green').addClass('btn--white');
+        setSpeedFastButton.removeClass('btn--green').addClass('btn--white');
     });
+
+    setSpeedMediumButton.click(function() {
+        speed = 300;
+        setSpeedMediumButton.removeClass('btn--white').addClass('btn--green');
+        setSpeedSlowButton.removeClass('btn--green').addClass('btn--white');
+        setSpeedFastButton.removeClass('btn--green').addClass('btn--white');
+    });
+
+    setSpeedFastButton.click(function() {
+        speed = 500;
+        setSpeedFastButton.removeClass('btn--white').addClass('btn--green');
+        setSpeedMediumButton.removeClass('btn--green').addClass('btn--white');
+        setSpeedSlowButton.removeClass('btn--green').addClass('btn--white');
+    });
+
+    window.onbeforeunload = function () {
+        chrome.runtime.reload();
+    };
 
 });
 

@@ -9,12 +9,13 @@
       "persistent": false
     },
 
-    "content_security_policy": "default-src 'self'; img-src 'self' https://img.purch.com http://www.livescience.com https://www.livescience.com; connect-src 'self' https://www.livescience.com;  style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; script-src 'self' 'unsafe-eval'",
+    "content_security_policy": "default-src 'self'; img-src 'self' https://dnmkr7tf85gze.cloudfront.net https://www.readworks.org http://www.coreutilities.com http://www.readworks.org https://img.purch.com; connect-src 'self' https://www.readworks.org http://www.coreutilities.com;  style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; script-src 'self' 'unsafe-eval'",
 
 	"content_scripts": [{
 		"matches": ["<all_urls>"],
 		"css": ["css/style.css"],
-        "js": ["js/getPagesSource.js"]
+        "js": ["js/getPagesSource.js"],
+        "run_at": "document_end"
 	}],
     "browser_action": {
       "default_title": "Butterfl.io",
